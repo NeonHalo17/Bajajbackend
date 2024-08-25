@@ -1,8 +1,8 @@
 # Use an official Maven image as the base image
-FROM maven:3.9.9-eclipse-temurin-21 AS build
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /bajaj
 
 # Copy the pom.xml and source code to the container
 COPY pom.xml .
@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy the built JAR file from the build stage
-COPY --from=build /app/target/bajaj-1.0-SNAPSHOT.jar /app/app.jar
+COPY --from=build /bajaj/target/bajaj-1.0-SNAPSHOT.jar /bajaj/bajaj.jar
 
 # Run the JAR file
 CMD ["java", "-jar", "/app/bajaj.jar"]
