@@ -1,5 +1,5 @@
 # Use an official Maven image as the base image
-FROM maven:3.8.6-openjdk-17 AS build
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,17 +8,19 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
+COPY . .
+
 # Build the application
 RUN mvn clean package
 
 # Use an openjdk image to run the application
-FROM openjdk:17-jdk
+FROM eclipse-temurin:21-jre
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the built JAR file from the build stage
-COPY --from=build /app/target/bajaj.jar /app/bajaj.jar
+COPY --from=build /app/target/bajaj-0.0.1-SNAPSHOT.jar /app/bajaj.jar
 
 # Run the JAR file
 CMD ["java", "-jar", "/app/bajaj.jar"]
