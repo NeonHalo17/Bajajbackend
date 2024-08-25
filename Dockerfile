@@ -15,10 +15,10 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 
 # Copy the JAR file from the build stage
-COPY --from=build /bajaj/target/bajaj-1.0-SNAPSHOT.jar bajaj.jar
+COPY --from=build /target/bajaj-1.0-SNAPSHOT.jar bajaj.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "bajaj.jar"]
