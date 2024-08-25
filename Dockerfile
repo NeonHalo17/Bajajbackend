@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy the built JAR file from the build stage
-COPY --from=build /app/target/bajaj-0.0.1-SNAPSHOT.jar /app/bajaj.jar
+COPY --from=build /app/target/bajaj-1.0-SNAPSHOT.jar /app/app.jar
 
 # Run the JAR file
 CMD ["java", "-jar", "/app/bajaj.jar"]
