@@ -4,6 +4,8 @@ FROM maven:3.9.4-eclipse-temurin-21 as build
 # Set the working directory inside the container
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y maven
+
 # Copy the pom.xml and download dependencies (use cache if unchanged)
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
